@@ -1,0 +1,105 @@
+
+### Create user
+POST http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/users/signup
+content-type: application/json
+
+{
+"email" : "user@gmail.com",
+"password" : "user",
+"username" : "user",
+"phone" : "1234",
+"appointments" : [],
+"properties": [],
+"role": "Customer"
+}
+
+
+### Login
+POST http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/users/login
+content-type: application/json
+
+{
+  "username": "customer",
+  "password": "123456"
+}
+
+> {% client.global.set("token", response.body.token); %}
+
+### Me
+GET http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM1MWExZWYxY2I5MmMwYjE4OTBhNzg5IiwiZW1haWwiOiJ1c2VyIiwicm9sZSI6IkN1c3RvbWVyIiwiaWF0IjoxNjY2Mjk0MzYzLCJleHAiOjE2NjYzODA3NjN9.CgrJoToagp2ORCAMA__UJbRX28v2UrIkWHg4hgMNefI
+
+### Geo Nearest
+GET http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/properties/500000/-123/39/findNear
+Authorization: Bearer {{token}}
+
+### Add property
+POST http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/properties
+content-type: application/json
+
+{
+"title": "House for selling",
+"description": "New decor/new furniture",
+"price": 10000,
+  "purpose":"rental",
+"type": "Apartment",
+"bedroom": 3,
+"petFriendly": true,
+"bathroom": 2,
+"owner": {
+"username": "user"
+},
+"address": {
+"street": "NB street",
+"city": "FairField",
+"state": "Iowa",
+"zipcode": 52556,
+"country": "USA"
+},
+"location": {
+"type": "Point",
+"coordinates": [
+-122.5,
+37.7
+]
+},
+"appointments": [
+{"username": "user",
+"schedule": "10/20/2022"
+}
+],
+  "image": "hhhhhhhh",
+"postDate": "10/10/2022"
+
+}
+
+### Bookappointment
+POST http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/properties/635348c4482bed91c753322f/m@gmail.com/appointment
+content-type: application/json
+
+{
+  "schedule": "10/20/2022"
+}
+
+### Changeappointment
+PATCH http://ec2-3-23-110-1.us-east-2.compute.amazonaws.com/properties/63534962482bed91c7533232/m@gmail.com/appointment
+content-type: application/json
+
+{
+  "schedule": "10/10/2022"
+}
+
+### CancelAppointment
+DELETE http://ec2-3-23-110-1.us-east-2.compute.amazonaws.com/properties/63534962482bed91c7533232/m@gmail.com/appointment
+
+### GetAppointmentOfCustomer
+GET http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/properties/b@gmail.com/customerappointment
+
+### GetAppointmentOfOwner
+GET http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/properties/user/ownerappointment
+
+### getPropertiesOfOwner
+GET http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/properties/a@gmail.com/owner
+
+### getAllProperties
+GET http://ec2-3-145-106-79.us-east-2.compute.amazonaws.com/properties/

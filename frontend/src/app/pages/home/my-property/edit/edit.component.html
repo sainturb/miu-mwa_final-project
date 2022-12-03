@@ -1,0 +1,113 @@
+<form [formGroup]="form" class="property-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <input matInput id="title" name="title" [formControlName]="'title'"
+           placeholder="Title"/>
+    <ng-container
+      *ngIf="getControl('title')?.invalid && (getControl('title')?.dirty || getControl('title')?.touched)">
+      <mat-hint style="color: red" align="end" *ngIf="getControl('title')?.errors?.['required']">Required
+        field
+      </mat-hint>
+      <mat-hint style="color: red" align="end" *ngIf="getControl('title')?.errors?.['minlength']">Min length
+        is 3
+      </mat-hint>
+    </ng-container>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput name="description" [formControlName]="'description'"></textarea>
+    <ng-container
+      *ngIf="getControl('description')?.invalid && (getControl('description')?.dirty || getControl('description')?.touched)">
+      <mat-hint style="color: red" align="end" *ngIf="getControl('description')?.errors?.['required']">
+        Required field
+      </mat-hint>
+      <mat-hint style="color: red" align="end" *ngIf="getControl('description')?.errors?.['minlength']">Min
+        length is 12
+      </mat-hint>
+    </ng-container>
+  </mat-form-field>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput type="number" name="price" formControlName="price" placeholder="Price">
+          <span matPrefix>$&nbsp;</span>
+          <span matSuffix>.00</span>
+          <ng-container
+            *ngIf="getControl('price')?.invalid && (getControl('price')?.dirty || getControl('price')?.touched)">
+            <mat-hint style="color: red" align="end" *ngIf="getControl('price')?.errors?.['required']">
+              Required field
+            </mat-hint>
+          </ng-container>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Bedroom</mat-label>
+          <input matInput type="number" name="bedroom" formControlName="bedroom" placeholder="Bedroom">
+          <ng-container
+            *ngIf="getControl('bedroom')?.invalid && (getControl('bedroom')?.dirty || getControl('bedroom')?.touched)">
+            <mat-hint style="color: red" align="end" *ngIf="getControl('bedroom')?.errors?.['required']">
+              Required field
+            </mat-hint>
+            <mat-hint style="color: red" align="end" *ngIf="getControl('bedroom')?.errors?.['min']">Min
+              value is 1
+            </mat-hint>
+            <mat-hint style="color: red" align="end" *ngIf="getControl('bedroom')?.errors?.['max']">max
+              value is 15
+            </mat-hint>
+          </ng-container>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Bathroom</mat-label>
+          <input matInput type="number" name="bathroom" formControlName="bathroom" placeholder="Bathroom">
+          <ng-container
+            *ngIf="getControl('bathroom')?.invalid && (getControl('bathroom')?.dirty || getControl('bathroom')?.touched)">
+            <mat-hint style="color: red" align="end" *ngIf="getControl('bathroom')?.errors?.['required']">
+              Required field
+            </mat-hint>
+            <mat-hint style="color: red" align="end" *ngIf="getControl('bathroom')?.errors?.['min']">Min
+              value is 1
+            </mat-hint>
+            <mat-hint style="color: red" align="end" *ngIf="getControl('bathroom')?.errors?.['max']">max
+              value is 15
+            </mat-hint>
+          </ng-container>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+
+
+  <div style="margin-bottom: 16px">
+    <mat-button-toggle-group name="purpose" formControlName="purpose" aria-label="Purpose of property">
+      <mat-button-toggle value="Rent">Rent</mat-button-toggle>
+      <mat-button-toggle value="Sell">Sell</mat-button-toggle>
+      <ng-container
+        *ngIf="getControl('purpose')?.invalid && (getControl('purpose')?.dirty || getControl('purpose')?.touched)">
+        <mat-hint style="color: red" align="end" *ngIf="getControl('purpose')?.errors?.['required']">
+          Required field
+        </mat-hint>
+      </ng-container>
+    </mat-button-toggle-group>
+  </div>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Type</mat-label>
+    <mat-select  name="type" formControlName="type">
+      <mat-option *ngFor="let type of types" [value]="type">
+        {{type}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>
+    <mat-slide-toggle name="petFriendly" formControlName="petFriendly">Pet friendly</mat-slide-toggle>
+  </p>
+  <div>
+    <button mat-stroked-button color="accent" class="btn-block" (click)="save()">Save</button>
+  </div>
+</form>

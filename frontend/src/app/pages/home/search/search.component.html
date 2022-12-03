@@ -1,0 +1,140 @@
+<div class="container"
+     fxLayout="row"
+     fxLayoutGap="16px"
+     fxLayoutAlign="start start">
+  <div class="filter" fxFlex="20">
+    <div class="" style="width: 100%">
+      <div class="example-full-width">
+        <button mat-stroked-button color="accent" class="btn-block " (click)="onMyLocation()">
+          <mat-icon aria-hidden="false" fontIcon="map_marker"></mat-icon>
+          Near my location
+        </button>
+      </div>
+      <div class="example-full-width text-align-center">
+        or
+      </div>
+      <div class="search-input">
+        <input class="basic-input" style="width: calc(100% - 26px)" [(ngModel)]="search" (keyup)="onSearch($event)"
+               placeholder="Search address here ..."/>
+        <div class="search-suggestion">
+          <div class="search-item" *ngFor="let feature of features" (click)="onSelectFeature(feature)">
+            <span>{{feature.place_name}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="filter-item">
+        <h4>Type</h4>
+        <div class="grid-four">
+          <button class="mat-focus-indicator btn-block grid-item mat-button-base mat-primary"
+                  [ngClass]="filter.type === 'Apartment' ? 'mat-raised-button' : 'mat-stroked-button'"
+                  (click)="onSet('type', 'Apartment')">
+            <div class="center-alignment">
+              <mat-icon aria-hidden="false" fontIcon="map_marker"></mat-icon>
+            </div>
+            <div class="center-alignment">Apartment</div>
+          </button>
+          <button class="mat-focus-indicator btn-block grid-item mat-button-base mat-primary"
+                  [ngClass]="filter.type === 'Private House' ? 'mat-raised-button' : 'mat-stroked-button'"
+                  (click)="onSet('type', 'Private House')">
+            <div class="center-alignment">
+              <mat-icon aria-hidden="false" fontIcon="map_marker"></mat-icon>
+            </div>
+            <div class="center-alignment">Private House</div>
+          </button>
+          <button class="mat-focus-indicator btn-block grid-item mat-button-base mat-primary"
+                  [ngClass]="filter.type === 'Condo' ? 'mat-raised-button' : 'mat-stroked-button'"
+                  (click)="onSet('type', 'Condo')">
+            <div class="center-alignment">
+              <mat-icon aria-hidden="false" fontIcon="map_marker"></mat-icon>
+            </div>
+            <div class="center-alignment">Condo</div>
+          </button>
+          <button class="mat-focus-indicator btn-block grid-item mat-button-base mat-primary"
+                  [ngClass]="filter.type === 'Room' ? 'mat-raised-button' : 'mat-stroked-button'"
+                  (click)="onSet('type', 'Room')">
+            <div class="center-alignment">
+              <mat-icon aria-hidden="false" fontIcon="map_marker"></mat-icon>
+            </div>
+            <div class="center-alignment">Room</div>
+          </button>
+        </div>
+      </div>
+      <div class="filter-item">
+        <h4>Price</h4>
+        <div class="price-slider">
+          <ngx-slider [(value)]="filter.minPrice" [(highValue)]="filter.maxPrice" [options]="options"></ngx-slider>
+        </div>
+        <div fxLayout="row" fxLayoutGap="8px">
+          <input class="basic-input sm" disabled [(ngModel)]="filter.minPrice"/>
+          <input class="basic-input sm" disabled [(ngModel)]="filter.maxPrice"/>
+          <button mat-stroked-button color="accent" class="btn-block " (click)="onSearchQuery()">Ok</button>
+        </div>
+      </div>
+      <div class="filter-item">
+        <h4>Rooms</h4>
+        <div class="number-filter">
+          <label>Bedroom: </label>
+          <span class="number-group-add-sub">
+            <span (click)="onSet('bedroom', filter.bedroom > 1 ? +filter.bedroom - 1 : 1)">-</span>
+            <span>{{filter.bedroom}}</span>
+            <span (click)="onSet('bedroom', filter.bedroom < 5 ? +filter.bedroom + 1 : 5)">+</span>
+          </span>
+        </div>
+        <div class="number-filter">
+          <label>Bathroom: </label>
+          <span class="number-group-add-sub">
+            <span (click)="onSet('bathroom', filter.bathroom > 1 ? +filter.bathroom - 1 : 1)">-</span>
+            <span>{{filter.bathroom}}</span>
+            <span (click)="onSet('bathroom', filter.bathroom < 5 ? +filter.bathroom + 1 : 5)">+</span>
+          </span>
+        </div>
+      </div>
+      <div class="filter-item">
+        <h4>Additional</h4>
+        <div class="number-filter">
+          <mat-slide-toggle (toggleChange)="onSet('petFriendly', filter.petFriendly ? !filter.petFriendly : true)">Pet friendly</mat-slide-toggle>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="40" class="scrollable">
+    <div class="filter-header">
+      <h2>{{properties.length}} items found </h2>
+      <button mat-button color="accent" (click)="fetch()">Clear filter</button>
+    </div>
+    <mat-card class="example-card" *ngFor="let property of properties">
+      <img mat-card-image [src]="property.images[0].url" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <span class="switch-button"
+              (click)="property.showImage = !property.showImage">{{property.showImage ? 'Show on Map' : 'Show image'}}</span>
+        <strong>{{property.title}}</strong>
+        <p>{{property.address.street}}, {{property.address.city}},  {{property.address.zipcode}}</p>
+        <div>
+          <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+            <strong>${{property.price}}.00</strong>
+            <strong style="display: inline-flex;align-items: center;justify-content: center;">
+              <mat-icon aria-hidden="false" fontIcon="bed"></mat-icon>
+              {{property.bedroom}}</strong>
+            <strong style="display: inline-flex;align-items: center;justify-content: center;">
+              <mat-icon aria-hidden="false" fontIcon="shower"></mat-icon>
+              {{property.bathroom}}</strong>
+            <strong style="display: inline-flex;align-items: center;justify-content: center;">
+              <mat-icon aria-hidden="false" [svgIcon]="property.petFriendly ? 'pet' : 'pet-not'"></mat-icon></strong>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="8px">
+          <button mat-raised-button color="primary"
+                  routerLink="/appointment/create"
+                  [queryParams]="{property_id: property._id}">Make appointment
+          </button>
+          <button class="mat-focus-indicator btn-block mat-button-base mat-accent"
+                  [ngClass]="isFavorite(property) ? 'mat-raised-button' : 'mat-stroked-button'"
+                  (click)="toggleFavorite(property)">Favorite</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="40" class="full-scale">
+    <app-map [id]="'all'" [properties]="properties"></app-map>
+  </div>
+</div>

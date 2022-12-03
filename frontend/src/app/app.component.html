@@ -1,0 +1,21 @@
+<mat-toolbar color="primary" class="app-header">
+  <div><a target="_blank" class="positronx">MWA</a></div>
+  <ng-template [ngIf]="user" [ngIfElse]="login">
+    <div class="nav-tool-items">
+      <a mat-button routerLink="appointment" routerLinkActive="active">Appointments</a>
+      <a mat-button routerLink="home/s" [queryParams]="{purpose: 'Rent'}" *ngIf="user.role === 'Customer'" routerLinkActive="active">Rent</a>
+      <a mat-button routerLink="home/s" [queryParams]="{purpose: 'Sell'}" *ngIf="user.role === 'Customer'" routerLinkActive="active">Buy</a>
+      <a mat-button routerLink="home/m" *ngIf="user.role === 'Owner'" routerLinkActive="active">My properties</a>
+      <a mat-button routerLink="property" routerLinkActive="active" *ngIf="user.role === 'Owner'">Add Property</a>
+      <a mat-button mat-raised-button (click)="logout()">Logout</a>
+    </div>
+  </ng-template>
+  <ng-template #login>
+    <div class="nav-tool-items">
+      <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
+      <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
+    </div>
+  </ng-template>
+</mat-toolbar>
+<router-outlet></router-outlet>
+<lib-ng-toast></lib-ng-toast>

@@ -1,0 +1,116 @@
+
+### Create user
+POST http://localhost:3000/users/signup
+content-type: application/json
+
+{
+  "email": "customer1@miu.edu",
+  "firstname": "Customer1",
+  "lastname": "User",
+  "password": "123456",
+  "username": "customer1",
+  "phone": "1234452311",
+  "role": "Customer"
+}
+
+
+### Login
+POST http://localhost:3000/users/login
+content-type: application/json
+
+{
+  "username": "owner3",
+  "password": "123456"
+}
+
+> {% client.global.set("token", response.body.token); %}
+
+### Me
+GET http://localhost:3000/users/me
+Authorization: Bearer {{token}}
+
+### Geo Nearest
+GET http://localhost:3000/properties/500000/-123/39/findNear
+Authorization: Bearer {{token}}
+
+### Get All
+GET http://localhost:3000/properties?petFriendly=true
+Authorization: Bearer {{token}}
+
+### Get One
+GET http://localhost:3000/properties/635466b37771216480819550
+Authorization: Bearer {{token}}
+
+### Get all properties of owner
+GET http://localhost:3000/properties/owner/all
+Authorization: Bearer {{token}}
+
+### Add property
+POST http://localhost:3000/properties
+content-type: application/json
+
+{
+  "title": "House for selling",
+  "description": "New decor/new furniture",
+  "price": 10000,
+  "purpose": "Rent",
+  "type": "Apartment",
+  "bedroom": 3,
+  "petFriendly": true,
+  "bathroom": 2,
+  "address": {
+    "street": "NB street",
+    "city": "FairField",
+    "state": "Iowa",
+    "zipcode": 52556,
+    "country": "United States"
+  },
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -122.5,
+      37.7
+    ]
+  },
+  "images": [
+  ],
+  "postDate": "2022-08-31T16:55:45Z"
+}
+
+### Get appointments
+GET http://localhost:3000/appointments
+Authorization: Bearer {{token}}
+
+### Book appointment
+POST http://localhost:3000/appointments/635466b37771216480819553
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "schedule": "10/21/2022"
+}
+
+> {% client.global.set("appointment_id", response.body._id); %}
+
+### Change appointment
+PATCH http://localhost:3000/appointments/635466b37771216480819553/{{appointment_id}}
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "schedule": "10/11/2022"
+}
+
+### Contact info
+GET http://localhost:3000/appointments/contact-info/635466b37771216480819553/{{appointment_id}}
+content-type: application/json
+Authorization: Bearer {{token}}
+
+
+### Cancel appointment
+DELETE http://localhost:3000/appointments/635466b37771216480819553/{{appointment_id}}
+Authorization: Bearer {{token}}
+
+
+
+

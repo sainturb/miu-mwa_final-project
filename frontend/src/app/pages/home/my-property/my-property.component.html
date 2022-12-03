@@ -1,0 +1,60 @@
+<div class="outer-container" fxLayout="column" fxLayoutAlign="space-around center">
+  <h1>My properties ({{properties.length}})</h1>
+  <div class="container">
+    <table mat-table [dataSource]="properties" class="mat-elevation-z8">
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let property" maxlength="50">{{property.title}}</td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let property">${{property.price}}</td>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let property">{{property.address.street}}, {{property.address.city}}, {{property.address.state}}</td>
+      </ng-container>
+      <ng-container matColumnDef="rooms">
+        <th mat-header-cell *matHeaderCellDef>Rooms</th>
+        <td mat-cell *matCellDef="let property">
+          <div>
+            <div>Bedroom: <strong>{{property.bedroom}}</strong></div>
+            <div>Bathroom: <strong>{{property.bathroom}}</strong></div>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="images">
+        <th mat-header-cell *matHeaderCellDef>Images</th>
+        <td mat-cell *matCellDef="let property">
+          <div class="images-absolute-position">
+            <div class="images-container" *ngFor="let image of property.images">
+              <img [src]="image.url"/>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let property">{{property.type}}</td>
+      </ng-container>
+      <ng-container matColumnDef="purpose">
+        <th mat-header-cell *matHeaderCellDef>Purpose</th>
+        <td mat-cell *matCellDef="let property">{{property.purpose}}</td>
+      </ng-container>
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edit</th>
+        <td mat-cell *matCellDef="let property" (click)="onEdit(property)"><button
+          mat-raised-button
+          color="primary">Edit</button></td>
+      </ng-container>
+      <ng-container matColumnDef="cancel">
+        <th mat-header-cell *matHeaderCellDef>Delete</th>
+        <td mat-cell *matCellDef="let property" (click)="onDelete(property)"><button
+          mat-raised-button
+          color="warn">Delete</button></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let property; columns:columns"></tr>
+    </table>
+  </div>
+</div>

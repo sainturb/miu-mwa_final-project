@@ -1,0 +1,260 @@
+:host {
+  max-width: 786px;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+.container {
+  margin: auto;
+  overflow: hidden;
+}
+.example-card {
+  max-width: calc(100% - 48px);
+  width: 100%;
+  max-height: 172px;
+  margin-top: 16px;
+  border-radius: 24px;
+  overflow: hidden;
+  display: inline-flex;
+
+  .mat-card-image {
+    width: 50%;
+    object-fit: cover;
+    margin: -16px 16px -16px -16px;
+    border-radius: 0;
+  }
+
+  .mat-card-content {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    position: relative;
+    justify-content: space-around;
+    .switch-button {
+      position: absolute;
+      top: -281px;
+      right: 0px;
+      background: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 2px 12px rgb(77, 77, 77);
+    }
+    strong {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1; /* number of lines to show */
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+    p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* number of lines to show */
+      line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  .mat-card-footer {
+    margin: 0;
+  }
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+.example-map {
+  height: 281px;
+  margin-top: -16px !important;
+  margin-left: -16px;
+  margin-right: -16px;
+  margin-bottom: 16px;
+}
+.filter {
+  padding: 16px;
+  display: flex;
+  overflow: auto;
+  background: #fff;
+  height: calc(100vh - 64px);;
+
+  .filter-inline {
+    display: inline-flex;
+    align-items: center;
+    span {
+      min-width: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+.basic-input {
+  height: 34px;
+  border: 1px solid #e4e4e4;
+  appearance: none;
+  border-radius: 4px;
+  padding: 0 12px;
+
+  &:active, &:focus {
+    outline: none;
+
+  }
+
+  &.sm {
+    width: 52px !important;
+  }
+}
+.search-input {
+  position: relative;
+
+  .search-suggestion {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px #565656;
+    z-index: 10000;
+
+    .search-item {
+      padding: 6px 12px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+  }
+}
+
+.full-scale {
+  height: calc(100vh - 64px);
+}
+
+.example-full-width .mat-stroked-button {
+  width: 100%;
+}
+
+.text-align-center {
+  text-align: center;
+}
+.filter-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 12px;
+  h2 {
+    margin: 0;
+  }
+}
+.filter-item {
+  padding: 6px 0;
+  .grid-four {
+    display: grid !important;
+    grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+    grid-row-gap: 8px;
+    grid-column-gap: 8px;
+    .grid-item {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0;
+    }
+  }
+}
+.center-alignment {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+::ng-deep {
+  .ngx-slider {
+    margin: 0 0 15px !important;
+  }
+  .price-slider .ngx-slider .ngx-slider-bar {
+    background: pink;
+    height: 2px;
+  }
+  .price-slider .ngx-slider .ngx-slider-selection {
+    background: deeppink;
+  }
+
+  .price-slider .ngx-slider .ngx-slider-pointer {
+    width: 16px;
+    height: 16px;
+    top: -8px;
+    bottom: 0;
+    background-color: deeppink;
+    border-radius: 8px;
+  }
+
+  .price-slider .ngx-slider .ngx-slider-pointer:after {
+    display: none;
+  }
+
+  .price-slider .ngx-slider .ngx-slider-bubble {
+    bottom: 14px;
+  }
+
+  .price-slider .ngx-slider .ngx-slider-limit {
+    font-weight: bold;
+    color: deeppink;
+  }
+
+  .price-slider .ngx-slider .ngx-slider-tick {
+    width: 1px;
+    height: 10px;
+    margin-left: 4px;
+    border-radius: 0;
+    background: pink;
+    top: -1px;
+  }
+
+  .price-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+    background: #2352b7;
+  }
+}
+.number-filter {
+  display: inline-flex;
+  height: 34px;
+  align-items: center;
+  margin-bottom: 8px;
+  label {
+    width: 100px;
+    display: block;
+  }
+}
+.number-group-add-sub {
+  height: 34px;
+  display: inline-flex;
+  span{
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:first-child, &:last-child {
+      background: #efefef;
+      border: 1px solid #efefef;
+      cursor: pointer;
+    }
+
+    &:first-child {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    &:last-child {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    &:nth-child(2) {
+      border: 1px solid #efefef;
+    }
+  }
+}

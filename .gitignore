@@ -1,0 +1,7 @@
+backend/node_modules
+frontend/node_modules
+/.idea/final-project-sainturb.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/backend/package-lock.json
+/.idea/vcs.xml

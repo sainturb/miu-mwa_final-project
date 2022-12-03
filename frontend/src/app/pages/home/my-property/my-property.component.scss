@@ -1,0 +1,49 @@
+.mat-cell {
+  padding: 12px;
+}
+
+.mat-cell.mat-column-title,.mat-cell.mat-column-address {
+  width: 184px;
+}
+
+.mat-cell.mat-column-price {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.images-absolute-position {
+  position: relative;
+  height: 105px;
+  width: 120px;
+  .images-container {
+    position: absolute;
+    width: 120px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(171, 171, 171, 0.7);
+    border-radius: 6px;
+    display: flex;
+
+    &:first-child {
+      bottom: 0;
+      z-index: 3;
+    }
+    &:nth-child(2) {
+      bottom: 16px;
+      left: 6px;
+      width: 108px;
+      z-index: 2;
+    }
+    &:nth-child(3) {
+      bottom: 30px;
+      left: 12px;
+      width: 96px;
+      z-index: 1;
+    }
+
+    img {
+      width: 100%;
+      max-height: 92px;
+      object-fit: cover;
+    }
+  }
+}
